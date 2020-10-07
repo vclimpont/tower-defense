@@ -2,18 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldOfView
+public class FieldOfView : MonoBehaviour
 {
-    private Transform transform;
-    private float detectRadius;
-    private float detectAngle;
-
-    public FieldOfView(Transform transform, float detectRadius, float detectAngle)
-    {
-        this.transform = transform;
-        this.detectAngle = detectAngle;
-        this.detectRadius = detectRadius;
-    }
+    public float detectRadius;
+    public float detectAngle;
 
     public List<Transform> DetectEnemies()
     {
@@ -30,7 +22,6 @@ public class FieldOfView
                 enemiesInRange.Add(enemy);
             }
         }
-
         return enemiesInRange;
     }
 
@@ -52,4 +43,14 @@ public class FieldOfView
         return closestEnemyTransform;
     }
 
+    void OnDrawGizmos()
+    {
+        Vector3 minusAngleDir = Quaternion.Euler(0, -detectAngle / 2, 0) * transform.forward;
+        Vector3 plusAngleDir = Quaternion.Euler(0, detectAngle / 2, 0) * transform.forward;
+        Vector3 minusAnglePos = transform.position + minusAngleDir * detectRadius;
+        Vector3 plusAnglePos = transform.position + plusAngleDir * detectRadius;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, minusAnglePos);
+        Gizmos.DrawLine(transform.position, plusAnglePos);
+    }
 }

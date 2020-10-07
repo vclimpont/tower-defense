@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cannon : MonoBehaviour
+public class Flamethrower : MonoBehaviour
 {
     private FieldOfView fov;
     private Turret turret;
@@ -19,6 +19,6 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        st.AttackVisibleEnemy(fov.GetClosestEnemyTransform(fov.DetectEnemies()));
+        st.AttackVisibleEnemies(fov.DetectEnemies());
     }
 }
