@@ -12,26 +12,33 @@ public class Enemy : MonoBehaviour, IDamageable, IKillable
     private List<Transform> destTransforms;
     private float maxSpeed;
     private int currentWaypoint;
+    private bool initialized;
 
-    void Start()
+    public void Initialize(GameObject destinations)
     {
+        destTransforms = new List<Transform>();
         maxSpeed = speed;
         currentWaypoint = 0;
-        InitializeDestinations();
+        InitializeDestinations(destinations);
+        initialized = true;
     }
 
     void FixedUpdate()
     {
-        Move();
+        if(initialized)
+        {
+            Move();
+        }
     }
 
-    void InitializeDestinations()
+    void InitializeDestinations(GameObject destinations)
     {
-        destTransforms = new List<Transform>();
-
-        foreach(Transform child in destinations.transform)
+        if(destinations != null)
         {
-            destTransforms.Add(child);
+            foreach (Transform child in destinations.transform)
+            {
+                destTransforms.Add(child);
+            }
         }
     }
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 971194368772902512}
   m_Layer: 8
   m_Name: MediumEnemy
-  m_TagString: Untagged
+  m_TagString: Medium
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
