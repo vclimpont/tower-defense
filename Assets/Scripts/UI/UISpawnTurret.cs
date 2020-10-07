@@ -5,18 +5,17 @@ using UnityEngine;
 public class UISpawnTurret : MonoBehaviour
 {
     public GameObject cannonPreview;
-    public GameObject cannonPrefab;
     public GameObject ftPreview;
-    public GameObject ftPrefab;
     public GameObject ionicPreview;
-    public GameObject ionicPrefab;
 
-    private GameObject currentTurret;
+    private GameManager gm;
+    private GameObject currentTurretPreview;
     private Camera mainCamera;
 
     void Start()
     {
         mainCamera = Camera.main;
+        gm = GetComponent<GameManager>();
     }
 
     void Update()
@@ -28,7 +27,7 @@ public class UISpawnTurret : MonoBehaviour
                 PlayerController.TurretSpawnPosition = GetMousePositionInWorld();
             }
 
-            currentTurret.transform.position = PlayerController.TurretSpawnPosition;
+            currentTurretPreview.transform.position = PlayerController.TurretSpawnPosition;
         }
     }
 
@@ -39,22 +38,31 @@ public class UISpawnTurret : MonoBehaviour
         return mousePosition;
     }
 
+    public void CancelSpawn()
+    {
+        PlayerController.Buying = false;
+        Destroy(currentTurretPreview);
+    }
+
     public void SpawnTurret(string turretType)
     {
-        PlayerController.Buying = true;
-        PlayerController.TurretSpawnPosition = GetMousePositionInWorld();
-
-        switch(turretType)
+        if(!PlayerController.Buying)
         {
-            case "Cannon":
-                currentTurret = Instantiate(cannonPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
-                break;
-            case "Flamethrower":
-                currentTurret = Instantiate(ftPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
-                break;
-            case "Ionic":
-                currentTurret = Instantiate(ionicPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
-                break;
+            PlayerController.Buying = true;
+            PlayerController.TurretSpawnPosition = GetMousePositionInWorld();
+            gm.SetCurrentTurret(turretType);
+            switch (turretType)
+            {
+                case "Cannon":
+                    currentTurretPreview = Instantiate(cannonPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
+                    break;
+                case "Flamethrower":
+                    currentTurretPreview = Instantiate(ftPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
+                    break;
+                case "Ionic":
+                    currentTurretPreview = Instantiate(ionicPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
+                    break;
+            }
         }
     }
 }

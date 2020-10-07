@@ -15,7 +15,6 @@ public class Tile : MonoBehaviour
 
     void OnMouseOver()
     {
-        Debug.Log(gameObject.name);
         PlayerController.OnTile = true;
         PlayerController.TurretSpawnPosition = tilePosition;
     }
