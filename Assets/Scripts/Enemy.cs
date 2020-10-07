@@ -10,22 +10,26 @@ public class Enemy : MonoBehaviour, IDamageable, IKillable
     public float speed;
 
     private List<Transform> destTransforms;
+    private float maxSpeed;
+    private int currentWaypoint;
 
     void Start()
     {
-
+        maxSpeed = speed;
+        currentWaypoint = 0;
+        InitializeDestinations();
     }
 
     void FixedUpdate()
     {
-
+        Move();
     }
 
     void InitializeDestinations()
     {
         destTransforms = new List<Transform>();
 
-        foreach(Transform child in transform)
+        foreach(Transform child in destinations.transform)
         {
             destTransforms.Add(child);
         }
@@ -33,7 +37,17 @@ public class Enemy : MonoBehaviour, IDamageable, IKillable
 
     void Move()
     {
-
+        if(currentWaypoint < destTransforms.Count)
+        {
+            if(Vector3.Distance(transform.position, destTransforms[currentWaypoint].position) > 0.2f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, destTransforms[currentWaypoint].position, speed);
+            }
+            else
+            {
+                currentWaypoint++;
+            }
+        }
     }
 
     public void Damage(float damageTaken)
@@ -49,5 +63,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKillable
     public void Kill()
     {
         Destroy(gameObject);
+    }
+
+    public float GetMaxSpeed()
+    {
+        return maxSpeed;
     }
 }

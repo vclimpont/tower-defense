@@ -34,8 +34,11 @@ public class ShootableTurret : MonoBehaviour
             {
                 enemies.Add(enemy.GetComponent<Enemy>());
             }
-
-            StartCoroutine(Shoot(enemies));
+            
+            if(enemies.Count > 0)
+            {
+                StartCoroutine(Shoot(enemies));
+            }
         }
     }
 
