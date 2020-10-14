@@ -121,7 +121,6 @@ public class Ionic : MonoBehaviour
     {
         canFreeze = false;
         isFreezing = true;
-        Debug.Log("FREEZE");
         foreach (Enemy enemy in enemies)
         {
             enemy.speed = 0f;

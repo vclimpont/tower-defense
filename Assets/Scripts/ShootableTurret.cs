@@ -45,7 +45,6 @@ public class ShootableTurret : MonoBehaviour
     IEnumerator Shoot(Enemy enemy)
     {
         CanShoot = false;
-        Debug.Log("PAF");
         enemy.Damage(damages);
 
         yield return new WaitForSeconds(hitRate);
@@ -58,7 +57,6 @@ public class ShootableTurret : MonoBehaviour
 
         foreach(Enemy enemy in enemies)
         {
-            Debug.Log("PAFPAFPAF");
             enemy.Damage(damages);
         }
 
