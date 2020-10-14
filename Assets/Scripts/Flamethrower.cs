@@ -5,7 +5,7 @@ using UnityEngine;
 public class Flamethrower : MonoBehaviour
 {
     public GameObject upgradeCannonGO;
-    public float boostDamageOnUpgrade;
+    public int boostDamageOnUpgrade;
 
     private FieldOfView fov;
     private FieldOfView upgradedFov;

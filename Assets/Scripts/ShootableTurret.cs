@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootableTurret : MonoBehaviour
 {
-    public float damages;
+    public int damages;
     public float hitRate;
 
     public bool CanShoot { get; set; }

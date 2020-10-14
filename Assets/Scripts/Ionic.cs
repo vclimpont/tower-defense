@@ -25,7 +25,6 @@ public class Ionic : MonoBehaviour
         canFreeze = true;
         isFreezing = false;
         crtFreezeCD = 0;
-        UpgradeTurret();
     }
 
     // Update is called once per frame

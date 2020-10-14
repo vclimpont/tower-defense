@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    public float boostDamageOnUpgrade;
+    public int boostDamageOnUpgrade;
     public float boostDetectRadiusOnUpgrade;
     public float boostDetectAngleOnUpgrade;
 
@@ -26,7 +26,7 @@ public class Cannon : MonoBehaviour
         st.AttackVisibleEnemy(fov.GetClosestEnemyTransform(fov.DetectEnemies()));
     }
 
-    void UpgradeTurret()
+    public void UpgradeTurret()
     {
         turret.UpgradeTurret();
         st.damages += boostDamageOnUpgrade;

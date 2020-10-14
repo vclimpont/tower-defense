@@ -5,7 +5,8 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     private Vector3 tilePosition;
-
+    
+    public Turret TurretOnTile { get; set; }
     public bool HasTurret { get; set; }
 
     // Start is called before the first frame update

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public static class PlayerController
 {
-    public static int Golds { get; set; }
+    public static int Gold { get; set; }
+    public static int Health { get; set; }
     public static Vector3 TurretSpawnPosition { get; set; }
     public static Vector3 TurretSpawnRotation { get; set; }
 

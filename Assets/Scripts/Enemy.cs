@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable, IKillable
 {
     public GameObject destinations;
-    public float health;
-    public float goldGiven;
+    public int health;
+    public int goldGiven;
     public float speed;
 
     private List<Transform> destTransforms;
@@ -55,16 +55,32 @@ public class Enemy : MonoBehaviour, IDamageable, IKillable
                 currentWaypoint++;
             }
         }
+        else
+        {
+            DamagePlayer();
+            Kill();
+        }
     }
 
-    public void Damage(float damageTaken)
+    public void Damage(int damageTaken)
     {
         health -= damageTaken;
 
         if(health <= 0)
         {
+            GiveGolds();
             Kill();
         }
+    }
+
+    void DamagePlayer()
+    {
+        PlayerController.Health--;
+    }
+
+    void GiveGolds()
+    {
+        PlayerController.Gold += goldGiven;
     }
 
     public void Kill()
