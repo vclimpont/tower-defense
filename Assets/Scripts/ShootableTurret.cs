@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShootableTurret : MonoBehaviour
 {
+    public GameObject bulletPrefab;
     public int damages;
     public float hitRate;
 
@@ -45,6 +46,8 @@ public class ShootableTurret : MonoBehaviour
     IEnumerator Shoot(Enemy enemy)
     {
         CanShoot = false;
+        GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bulletGO.GetComponent<Bullet>().Initialize(enemy.transform.position);
         enemy.Damage(damages);
 
         yield return new WaitForSeconds(hitRate);
@@ -57,6 +60,8 @@ public class ShootableTurret : MonoBehaviour
 
         foreach(Enemy enemy in enemies)
         {
+            GameObject bulletGO = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bulletGO.GetComponent<Bullet>().Initialize(enemy.transform.position);
             enemy.Damage(damages);
         }
 
