@@ -34,7 +34,7 @@ public class UISpawnTurret : MonoBehaviour
     Vector3 GetMousePositionInWorld()
     {
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-        Input.mousePosition.y, 15));
+        Input.mousePosition.y, 25));
         return mousePosition;
     }
 
