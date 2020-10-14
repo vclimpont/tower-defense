@@ -7,6 +7,16 @@ public class FieldOfView : MonoBehaviour
     public float detectRadius;
     public float detectAngle;
 
+    public Vector3 FovDirection { get; set; }
+
+    void Start()
+    {
+        if(FovDirection == Vector3.zero)
+        {
+            FovDirection = transform.forward;
+        }
+    }
+
     public List<Transform> DetectEnemies()
     {
         List<Transform> enemiesInRange = new List<Transform>();
@@ -17,7 +27,7 @@ public class FieldOfView : MonoBehaviour
             Transform enemy = enemiesInViewRadius[i].transform;
             Vector3 dirToEnemy = (enemy.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, dirToEnemy) < detectAngle / 2)
+            if (Vector3.Angle(FovDirection, dirToEnemy) < detectAngle / 2)
             {
                 enemiesInRange.Add(enemy);
             }
@@ -43,10 +53,17 @@ public class FieldOfView : MonoBehaviour
         return closestEnemyTransform;
     }
 
+    public void SetFov(float _detectRadius, float _detectAngle, Vector3 _fovDirection)
+    {
+        detectRadius = _detectRadius;
+        detectAngle = _detectAngle;
+        FovDirection = _fovDirection;
+    }
+
     void OnDrawGizmos()
     {
-        Vector3 minusAngleDir = Quaternion.Euler(0, -detectAngle / 2, 0) * transform.forward;
-        Vector3 plusAngleDir = Quaternion.Euler(0, detectAngle / 2, 0) * transform.forward;
+        Vector3 minusAngleDir = Quaternion.Euler(0, -detectAngle / 2, 0) * FovDirection;
+        Vector3 plusAngleDir = Quaternion.Euler(0, detectAngle / 2, 0) * FovDirection;
         Vector3 minusAnglePos = transform.position + minusAngleDir * detectRadius;
         Vector3 plusAnglePos = transform.position + plusAngleDir * detectRadius;
         Gizmos.color = Color.red;

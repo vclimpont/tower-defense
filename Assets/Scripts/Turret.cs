@@ -9,18 +9,11 @@ public class Turret : MonoBehaviour, IBuyable, IUpgradable
 
     public bool Upgraded { get; set;}
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpgradeTurret()
     {
-        Upgraded = false;
-    }
-
-    public void UpgradeTurret(float playerGolds)
-    {
-        if(playerGolds >= costUpgrade)
+        if(!Upgraded)
         {
             Upgraded = true;
         }
     }
-
 }

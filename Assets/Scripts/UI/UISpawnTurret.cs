@@ -28,14 +28,8 @@ public class UISpawnTurret : MonoBehaviour
             }
 
             currentTurretPreview.transform.position = PlayerController.TurretSpawnPosition;
+            currentTurretPreview.transform.rotation = Quaternion.Euler(PlayerController.TurretSpawnRotation);
         }
-    }
-
-    Vector3 GetMousePositionInWorld()
-    {
-        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
-        Input.mousePosition.y, 25));
-        return mousePosition;
     }
 
     public void CancelSpawn()
@@ -44,25 +38,34 @@ public class UISpawnTurret : MonoBehaviour
         Destroy(currentTurretPreview);
     }
 
-    public void SpawnTurret(string turretType)
+    public void SpawnTurretPreview(string turretType)
     {
-        if(!PlayerController.Buying)
+        if(PlayerController.Buying)
         {
-            PlayerController.Buying = true;
-            PlayerController.TurretSpawnPosition = GetMousePositionInWorld();
-            gm.SetCurrentTurret(turretType);
-            switch (turretType)
-            {
-                case "Cannon":
-                    currentTurretPreview = Instantiate(cannonPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
-                    break;
-                case "Flamethrower":
-                    currentTurretPreview = Instantiate(ftPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
-                    break;
-                case "Ionic":
-                    currentTurretPreview = Instantiate(ionicPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
-                    break;
-            }
+            CancelSpawn();
         }
+
+        PlayerController.Buying = true;
+        PlayerController.TurretSpawnPosition = GetMousePositionInWorld();
+        gm.SetCurrentTurretPrefab(turretType);
+        switch (turretType)
+        {
+            case "Cannon":
+                currentTurretPreview = Instantiate(cannonPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
+                break;
+            case "Flamethrower":
+                currentTurretPreview = Instantiate(ftPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
+                break;
+            case "Ionic":
+                currentTurretPreview = Instantiate(ionicPreview, PlayerController.TurretSpawnPosition, Quaternion.identity);
+                break;
+        }
+    }
+
+    Vector3 GetMousePositionInWorld()
+    {
+        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+        Input.mousePosition.y, 25));
+        return mousePosition;
     }
 }

@@ -55,10 +55,10 @@ public class ShootableTurret : MonoBehaviour
     IEnumerator Shoot(List<Enemy> enemies)
     {
         CanShoot = false;
-        Debug.Log("PAFPAFPAF");
 
         foreach(Enemy enemy in enemies)
         {
+            Debug.Log("PAFPAFPAF");
             enemy.Damage(damages);
         }
 

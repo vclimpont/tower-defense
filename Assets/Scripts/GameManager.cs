@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     private UISpawnTurret UIst;
     private GameObject currentTurret;
+    private GameObject currentTurretPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
         {
             SpawnTurret();
         }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            RotateTurret();
+        }
     }
 
     void LateUpdate()
@@ -45,25 +51,34 @@ public class GameManager : MonoBehaviour
 
     void SpawnTurret()
     {
-        if (PlayerController.Buying && PlayerController.OnTile)
+        if (PlayerController.Buying && PlayerController.OnTile && !PlayerController.CurrentTile.HasTurret)
         {
-            Vector3 spawnPosition = PlayerController.TurretSpawnPosition + new Vector3(0, currentTurret.transform.localScale.y, 0);
-            currentTurret = Instantiate(currentTurret, spawnPosition, Quaternion.identity);
+            Vector3 spawnPosition = PlayerController.TurretSpawnPosition + new Vector3(0, currentTurretPrefab.transform.localScale.y, 0);
+            currentTurret = Instantiate(currentTurretPrefab, spawnPosition, Quaternion.Euler(PlayerController.TurretSpawnRotation));
+            PlayerController.CurrentTile.HasTurret = true;
         }
     }
 
-    public void SetCurrentTurret(string turretType)
+    void RotateTurret()
+    {
+        if (PlayerController.Buying && PlayerController.OnTile)
+        {
+            PlayerController.TurretSpawnRotation += new Vector3(0, 45, 0);
+        }
+    }
+
+    public void SetCurrentTurretPrefab(string turretType)
     {
         switch (turretType)
         {
             case "Cannon":
-                currentTurret = cannonPrefab;
+                currentTurretPrefab = cannonPrefab;
                 break;
             case "Flamethrower":
-                currentTurret = ftPrefab;
+                currentTurretPrefab = ftPrefab;
                 break;
             case "Ionic":
-                currentTurret = ionicPrefab;
+                currentTurretPrefab = ionicPrefab;
                 break;
         }
     }

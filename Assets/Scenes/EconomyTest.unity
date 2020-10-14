@@ -605,7 +605,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1941600316}
-        m_MethodName: SpawnTurret
+        m_MethodName: SpawnTurretPreview
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -915,7 +915,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1941600316}
-        m_MethodName: SpawnTurret
+        m_MethodName: SpawnTurretPreview
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3122,7 +3122,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1941600316}
-        m_MethodName: SpawnTurret
+        m_MethodName: SpawnTurretPreview
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3631,6 +3631,16 @@ PrefabInstance:
       propertyPath: bigDestinations
       value: 
       objectReference: {fileID: 583620375}
+    - target: {fileID: 1925507875697394965, guid: c7e46321941192b48840219ecb8d6fe9,
+        type: 3}
+      propertyPath: nbWaves
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925507875697394965, guid: c7e46321941192b48840219ecb8d6fe9,
+        type: 3}
+      propertyPath: timeBtwWaves
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1925507875697394966, guid: c7e46321941192b48840219ecb8d6fe9,
         type: 3}
       propertyPath: m_LocalPosition.x
